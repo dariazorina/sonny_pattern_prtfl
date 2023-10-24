@@ -1,22 +1,37 @@
-import { Inter } from 'next/font/google'
-import Header from '@/components/Header'
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import Experience from '@/components/Experience'
-import Skills from '@/components/Skills'
-import ContactMe from '@/components/ContactMe'
-import Link from 'next/link'
+import { GetStaticProps } from 'next';
+import { Inter } from 'next/font/google';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import About from '@/components/About';
+import WorkExperience from '@/components/WorkExperience';
+import Skill from '@/components/Skills';
+import ContactMe from '@/components/ContactMe';
+import Link from 'next/link';
+import { Experience, PageInfo, Skills, Social } from "../typings";
+import { fetchPageInfo } from '@/utils/fetchPageInfo';
+import { fetchSkills } from '@/utils/fetchSkills';
+import { fetchExperience } from '@/utils/fetchExperience';
+import { fetchSocial } from '@/utils/fetchSocial';
 
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
-export default function Home() {
+type Props = {
+  pageInfo: PageInfo;
+  experience: Experience[];
+  skills: Skills[];
+  socials: Social[];
+}
+
+const Home = ({ pageInfo, experience, skills, socials }: Props) => {
+  console.log("Home anfange1n", { socials });
+
   return (
     <div className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80'>
-      <Header />
+      <Header socials={socials} />
 
       <section id="hero" className='snap-start'>
-        <Hero />
+        <Hero pageInfo={pageInfo}/>
       </section>
 
       <section id="about" className='snap-center'>
@@ -24,11 +39,12 @@ export default function Home() {
       </section>
 
       <section id="experience" className='snap-center'>
-        <Experience />
+        <WorkExperience experience={experience} />
+        {/* <WorkExperience /> */}
       </section>
 
       <section id="skills" className='snap-center'>
-        <Skills />
+        {/* <Skills /> */}
       </section>
 
       {/* projects? */}
@@ -47,8 +63,29 @@ export default function Home() {
             />
           </div>
         </footer>
-      </Link> 
+      </Link>
     </div>
-
   )
+}
+export default Home;
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+
+// console.log("Error fetching data:");
+// console.log("===== GETSTATICPROPS IS RUNNING =====");
+
+  const pageInfo: PageInfo = await fetchPageInfo();
+  const experience: Experience[] = await fetchExperience();
+  const skills: Skills[] = await fetchSkills();
+  const socials: Social[] = await fetchSocial();
+
+  return {
+    props: {
+      pageInfo,
+      experience,
+      skills,
+      socials
+    },
+    revalidate: 10,
+  }
 }
