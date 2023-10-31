@@ -1,6 +1,7 @@
 import React from 'react'
 import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid"
 import { useForm, SubmitHandler } from "react-hook-form"
+import { PageInfo } from '@/typings';
 
 type Inputs = {
     name: string
@@ -9,9 +10,11 @@ type Inputs = {
     message: string
 };
 
-type Props = {};
+type Props = {
+    pageInfo: PageInfo;
+};
 
-export default function ContactMe({ }: Props) {
+export default function ContactMe({ pageInfo }: Props) {
     const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (formData) => {
@@ -30,22 +33,22 @@ export default function ContactMe({ }: Props) {
             <div className='flex flex-col space-y-10'>
                 <h4 className='text-4xl font-semibold text-center' >
                     I have got just what you need {" "}
-                    <span className='decoration-#F7AB0A]/50 underline'>
+                    {/* <span className='decoration-#F7AB0A]/50 underline'>
                         Lets Talk
-                    </span>
+                    </span> */}
                 </h4>
                 <div className='space-y-10'>
                     <div className='flex items-center space-x-5 justify-center'>
                         <PhoneIcon className='text-[#F7AB0A] h-7 w-7 animate-pulse' />
-                        <p>+4179</p>
+                        <p className='text-xl'>{pageInfo.phoneNumber}</p>
                     </div>
                     <div className='flex items-center space-x-5 justify-center'>
                         <EnvelopeIcon className='text-[#F7AB0A] h-7 w-7 animate-pulse' />
-                        <p className='text-2xl'>daria.zorina@yahoo.com</p>
+                        <p className='text-xl'>{pageInfo.email}</p>
                     </div>
                     <div className='flex items-center space-x-5 justify-center'>
                         <MapPinIcon className='text-[#F7AB0A] h-7 w-7 animate-pulse' />
-                        <p>Address: 23,  456</p>
+                        <p className='text-xl'>{pageInfo.address}</p>
                     </div>
                 </div>
                 <form

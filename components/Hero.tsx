@@ -5,7 +5,7 @@ import BackgroundCircles from './BackgroundCircles';
 import Image from 'next/image'
 import { PageInfo } from '@/typings';
 
-import { sanityClient }  from '@/sanity';
+import { sanityClient } from '@/sanity';
 import imageUrlBuilder from '@sanity/image-url'
 
 const builder = imageUrlBuilder(sanityClient);
@@ -21,19 +21,19 @@ export default function Hero({ pageInfo }: Props) {
         delaySpeed: 2000,
     });
 
-    function urlFor(source: any){
+    function urlFor(source: any) {
         return builder.image(source)
-      }
+    }
 
     return (
         <div className='h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden'>
             <BackgroundCircles />
             <Image
                 alt='me'
-                className='relative rounded-full h-32 w-32 mx-auto object-cover'                
-                src={urlFor(pageInfo?.heroImage).url()}                
+                className='relative rounded-full h-32 w-32 mx-auto object-cover'
+                src={urlFor(pageInfo?.heroImage).url()}
                 width={3000}
-                height={4000}                
+                height={4000}
             />
             <div className='z-20'>
                 <h2 className='text-sm uppercase text-gray-500 pb-2 tracking-[15px]'>
