@@ -25,9 +25,11 @@ export default function EducationList({ education }: Props) {
                 {education?.map(education =>
                     // <Link href={urlFor(education.diploma).url()}>
                     // <Link href={education.urlDiploma ? education.urlDiploma : urlFor(education.imageDiploma).url()}>
-                    <Link href={education.urlDiploma ? education.urlDiploma : ""}>
-                        <EducationCard key={education._id} education={education} />
-                    </Link>
+                    <div key={education._id}>
+                        <Link href={education.urlDiploma ? education.urlDiploma : ""}>
+                            <EducationCard key={education._id} education={education} />
+                        </Link>
+                    </div>
                 )}
             </div>
         </motion.div >
