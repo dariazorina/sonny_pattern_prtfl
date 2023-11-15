@@ -4,13 +4,15 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import WorkExperience from '@/components/WorkExperience';
+import EducationList from '@/components/EducationList';
 import Skills from '@/components/Skills';
 import ContactMe from '@/components/ContactMe';
 import Link from 'next/link';
-import { Experience, PageInfo, Skill, Social } from "../typings";
+import { Experience, PageInfo, Skill, Social, Education } from "../typings";
 import { fetchPageInfo } from '@/utils/fetchPageInfo';
 import { fetchSkills } from '@/utils/fetchSkills';
 import { fetchExperience } from '@/utils/fetchExperience';
+import { fetchEducation } from '@/utils/fetchEducation';
 import { fetchSocial } from '@/utils/fetchSocial';
 import { urlFor } from '@/sanity';
 
@@ -22,13 +24,14 @@ type Props = {
   experience: Experience[];
   skills: Skill[];
   socials: Social[];
+  education: Education[];
 }
 
-const Home = ({ pageInfo, experience, skills, socials }: Props) => {
+const Home = ({ pageInfo, experience, skills, socials, education }: Props) => {
   console.log("Home", { experience });
 
   return (
-    <div className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80'>
+    <div className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#703333]/80'>
       <Header socials={socials} />
 
       <section id="hero" className='snap-start'>
@@ -46,8 +49,10 @@ const Home = ({ pageInfo, experience, skills, socials }: Props) => {
       <section id="skills" className='snap-start'>
         <Skills skills={skills}/>
       </section>
-
-      {/* projects? */}
+      
+      <section id="education" className='snap-center'>
+        <EducationList education={education} />
+      </section>
 
       <section id="contact" className='snap-center'>
         <ContactMe pageInfo={pageInfo}/>
@@ -79,13 +84,15 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const experience: Experience[] = await fetchExperience();
   const skills: Skill[] = await fetchSkills();
   const socials: Social[] = await fetchSocial();
+  const education: Education[] = await fetchEducation();
 
   return {
     props: {
       pageInfo,
       experience,
       skills,
-      socials
+      socials,
+      education
     },
     revalidate: 10,
   }

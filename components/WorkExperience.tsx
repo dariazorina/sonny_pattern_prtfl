@@ -8,6 +8,9 @@ type Props = {
 }
 
 export default function WorkExperience({ experience }: Props) {
+
+    let reversed = [...experience].reverse();
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -18,10 +21,13 @@ export default function WorkExperience({ experience }: Props) {
             <h3 className='absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl'>
                 Experience
             </h3>
-            <div className='w-full flex space-x-5 overflow-x-scroll p-10 snap-x snap-mandatory  scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80 scrollbar-thin'>
-                {experience?.map(experience =>
-                    <ExperienceCard key={experience._id} experience={experience} />
-                )}
+            <div className='w-full flex space-x-5 overflow-x-scroll p-10 snap-x snap-mandatory  scrollbar-track-gray-400/20 scrollbar-thumb-[#703333]/80 scrollbar-thin'>
+                {
+                    reversed?.map(reversed =>
+                        <ExperienceCard key={reversed._id} experience={reversed} />
+                    )
+                }
+
             </div>
         </motion.div>
     )

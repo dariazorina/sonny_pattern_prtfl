@@ -3,7 +3,6 @@ interface SanityBody {
     _id: string;
     _rev: string;
     _updatedAt: string;
-
 }
 
 interface Image {
@@ -50,6 +49,16 @@ export interface Experience extends SanityBody {
     jobTitle: string;
     points: string[];
     technologies: Technology[];
+}
+export interface Education extends SanityBody {
+    _type: "education";
+    title: string;
+    institution: string;
+    dateStarted: date;
+    dateEnded: date;  
+    diploma: object; 
+    urlDiploma: string; 
+    imageDiploma: Image;
 }
 
 // export interface Project extends SanityBody {
