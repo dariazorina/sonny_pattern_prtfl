@@ -15,6 +15,7 @@ import { fetchExperience } from '@/utils/fetchExperience';
 import { fetchEducation } from '@/utils/fetchEducation';
 import { fetchSocial } from '@/utils/fetchSocial';
 import { urlFor } from '@/sanity';
+import Image from 'next/image'
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -61,10 +62,13 @@ const Home = ({ pageInfo, experience, skills, socials, education }: Props) => {
       <Link href='#hero'>
         <footer className='sticky bottom-5 w-full cursor-pointer'>
           <div className='flex items-center justify-center'>
-            <img
+            <Image
+              key={pageInfo._id}
               className='h-10 w-10 rounded-full filtergrayscale hover:grayscale-0 cursor-pointer'
               // src='https://e7.pngegg.com/pngimages/793/545/png-clipart-javascript-logo-computer-icons-vue-js-angle-text-thumbnail.png'
               src={urlFor(pageInfo?.heroImage).url()}
+              width={10}
+              height={10}
               alt=''
             />
           </div>
