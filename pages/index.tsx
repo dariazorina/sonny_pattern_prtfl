@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
@@ -19,6 +19,14 @@ import Image from 'next/image'
 
 
 const inter = Inter({ subsets: ['latin'] });
+
+// const Home = () => {
+// return (
+//   <div>
+
+//   </div>
+// ) }
+// export default Home;
 
 type Props = {
   pageInfo: PageInfo;
@@ -48,15 +56,15 @@ const Home = ({ pageInfo, experience, skills, socials, education }: Props) => {
       </section>
 
       <section id="skills" className='snap-start'>
-        <Skills skills={skills}/>
+        <Skills skills={skills} />
       </section>
-      
+
       <section id="education" className='snap-center'>
         <EducationList education={education} />
       </section>
 
       <section id="contact" className='snap-center'>
-        <ContactMe pageInfo={pageInfo}/>
+        <ContactMe pageInfo={pageInfo} />
       </section>
 
       <Link href='#hero'>
@@ -81,9 +89,6 @@ export default Home;
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
 
-  // console.log("Error fetching data:");
-  // console.log("===== GETSTATICPROPS IS RUNNING =====");
-
   const pageInfo: PageInfo = await fetchPageInfo();
   const experience: Experience[] = await fetchExperience();
   const skills: Skill[] = await fetchSkills();
@@ -101,3 +106,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     revalidate: 10,
   }
 }
+
+// export const getServerSideProps: GetServerSideProps<PageProps> = async (ctx) => {
+//   const props = await getPropsFromAService()
+
+//   return { props: JSON.parse(JSON.stringify(props)) }
+// }
