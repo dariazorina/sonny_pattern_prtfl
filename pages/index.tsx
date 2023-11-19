@@ -20,14 +20,6 @@ import Image from 'next/image'
 
 const inter = Inter({ subsets: ['latin'] });
 
-// const Home = () => {
-// return (
-//   <div>
-
-//   </div>
-// ) }
-// export default Home;
-
 type Props = {
   pageInfo: PageInfo;
   experience: Experience[];
