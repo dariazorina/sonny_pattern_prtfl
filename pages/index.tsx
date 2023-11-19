@@ -75,8 +75,8 @@ const Home = ({ pageInfo, experience, skills, socials, education }: Props) => {
               className='h-10 w-10 rounded-full filtergrayscale hover:grayscale-0 cursor-pointer'
               // src='https://e7.pngegg.com/pngimages/793/545/png-clipart-javascript-logo-computer-icons-vue-js-angle-text-thumbnail.png'
               src={urlFor(pageInfo?.heroImage).url()}
-              width={10}
-              height={10}
+              width={100}
+              height={100}
               alt=''
             />
           </div>
